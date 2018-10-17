@@ -8,6 +8,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/filesystem.hpp>
 
+#include "std_msgs/UInt8.h"
 #include "std_msgs/String.h"
 #include "spinnaker_sdk_camera_driver/spinnaker_image_names.h"
 
@@ -122,17 +123,20 @@ namespace acquisition {
         ros::NodeHandle nh_;
         ros::NodeHandle nh_pvt_;
 
+	//tarun's code
+	ros::Publisher trigger_pub;
+	
         ros::Publisher acquisition_pub;
-		vector<ros::Publisher> camera_image_pubs;
-		vector<ros::Publisher> camera_info_pubs;
+	vector<ros::Publisher> camera_image_pubs;
+	vector<ros::Publisher> camera_info_pubs;
 		
 		
-		vector<sensor_msgs::ImagePtr> img_msgs;
-		vector<sensor_msgs::CameraInfo> cam_info_msgs;
-		spinnaker_sdk_camera_driver::spinnaker_image_names mesg;
+	vector<sensor_msgs::ImagePtr> img_msgs;
+	vector<sensor_msgs::CameraInfo> cam_info_msgs;
+	spinnaker_sdk_camera_driver::spinnaker_image_names mesg;
 		
 		
-		boost::mutex queue_mutex_;
+	boost::mutex queue_mutex_;
    
     };
 

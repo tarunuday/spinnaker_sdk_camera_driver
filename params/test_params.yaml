@@ -1,8 +1,10 @@
 cam_ids:
-- 17197555
+- 18080155
+- 18159617
 cam_aliases:
 - cam0
-master_cam: 17197555
+- cam1
+master_cam: 18080155
 skip: 20
 delay: 0
 
@@ -14,5 +16,5 @@ delay: 0
 #color: false
 #frames: 50
 #soft_framerate: 4 # this frame rate reflects to the software frame rate set using ros::rate
-#exp: 997
+#exp: 10
 #to_ros: true  #When to_ros is not selected, but live is selected, pressing 'space' exports single image to ROS

@@ -113,6 +113,9 @@ acquisition::Capture::Capture():nh_(),nh_pvt_ ("~") {
  
     //initializing the ros publisher
     acquisition_pub = nh_.advertise<spinnaker_sdk_camera_driver::spinnaker_image_names>("camera", 1000);
+
+    trigger_pub = nh_.advertise<std_msgs::UInt8>("lightTrigger", 1);
+    
 }
 
 void acquisition::Capture::load_cameras() {
@@ -719,6 +722,11 @@ void acquisition::Capture::run_soft_trig() {
     
     start_acquisition();
 
+    //tarun's code
+    std_msgs::UInt8 trig_rate;
+    trig_rate.data=soft_framerate_/1;
+
+    
     // Camera directories created at first save
     
     if (LIVE_)namedWindow("Acquisition", CV_WINDOW_NORMAL | CV_WINDOW_KEEPRATIO);
@@ -797,6 +805,13 @@ void acquisition::Capture::run_soft_trig() {
         if (!MANUAL_TRIGGER_) {
             cams[MASTER_CAM_].trigger();
             get_mat_images();
+
+	    //tarun's code
+	    if(trig_rate.data)
+	    {
+		trigger_pub.publish(trig_rate);
+		trig_rate.data=0;
+	    }
         }
 
 
